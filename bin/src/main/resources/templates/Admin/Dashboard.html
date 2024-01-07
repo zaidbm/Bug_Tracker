@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        .container {
+            background-color: #ffffff;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #007bff;
+        }
+
+        .list-group-item {
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .list-group-item span {
+            font-weight: bold;
+        }
+
+        .badge {
+            font-size: 14px;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+        }
+
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: 0.5rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .nav-link {
+            color: #007bff;
+        }
+
+        .nav-link.active {
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        .dropdown-item {
+            color: #007bff;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                Admin Dashboard 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Employees
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">All</a>
+                                <a class="dropdown-item" href="#">Admins</a>
+                                <a class="dropdown-item" href="#">Managers</a>
+                                <a class="dropdown-item" href="#">Developers</a>
+                                <a class="dropdown-item" href="#">Testers</a>
+                                <a class="dropdown-item" href="#">Customer Support</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Teams
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Projects
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Bugs
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Category
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Priority
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{../Severities/Index}">
+                           Severity
+                        </a>
+                    </li>
+                   
+                   	<li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Tags
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Comments
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                           Attachments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <form th:action="@{/logout}" method="post">
+    						<input type="submit" value="Logout" />
+							</form>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+            <!-- Content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="container">
+                    <h2>Admin Dashboard</h2>
+                    <!-- Total Bug Count -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Bugs</h5>
+                <p class="card-text"><span th:text="${allbugs}"></span></p>
+            </div>
+        </div>
+
+        <!-- Bug Count By Status -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Active Bugs</h5>
+                        <p class="card-text"><span th:text="${Active}"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">In Progress Bugs</h5>
+                        <p class="card-text"><span th:text="${InProgress}"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Resolved Bugs</h5>
+                        <p class="card-text"><span th:text="${Resolved}"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Closed Bugs</h5>
+                        <p class="card-text"><span th:text="${Closed}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bug Count By Priority -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bug Count By Priority</h5>
+                <ul class="list-group">
+                    <li th:each="entry : ${BugCountPerPriority}" class="list-group-item d-flex justify-content-between">
+                        <span th:text="${entry.key}"></span>: <span class="badge badge-primary"
+                            th:text="${entry.value}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bug Count By Severity -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bug Count By Severity</h5>
+                <ul class="list-group">
+                    <li th:each="entry : ${BugCountPerSeverity}" class="list-group-item d-flex justify-content-between">
+                        <span th:text="${entry.key}"></span>: <span class="badge badge-warning"
+                            th:text="${entry.value}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bug Count By Category -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bug Count By Category</h5>
+                <ul class="list-group">
+                    <li th:each="entry : ${BugCountPerCategory}" class="list-group-item d-flex justify-content-between">
+                        <span th:text="${entry.key}"></span>: <span class="badge badge-success"
+                            th:text="${entry.value}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Total Projects -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Projects</h5>
+                <p class="card-text"><span th:text="${ProjectCount}"></span></p>
+            </div>
+        </div>
+
+        <!-- Number of Active Projects -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Active Projects</h5>
+                <p class="card-text"><span th:text="${ActiveProjects}"></span></p>
+            </div>
+        </div>
+
+        <!-- Projects Bug Count in Descending Order -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Projects with Most Bugs</h5>
+                <ul class="list-group">
+                    <li th:each="project : ${sortedProjects}" class="list-group-item d-flex justify-content-between">
+                        <span th:text="${project.title}"></span>: <span class="badge badge-danger"
+                            th:text="${project.getBugs().size()}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

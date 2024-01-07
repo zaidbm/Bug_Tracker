@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1" />
+        <title>Ajouter Bug</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    </head>
+    <body>
+        <div class="card m-4">
+            <div class="card-header">Ajouter Bug</div>
+            <div class="card-body">
+                <form class="m-2" th:action="@{Store}" method="post" th:object="${bug}">
+                    <label>Titre</label>
+                    <input class="form-control" type="text" th:field="*{title}" />
+                    <span class="text-danger" th:errors="*{title}"></span>
+                    <label>Description</label>
+                    <textarea class="form-control" th:field="*{description}"></textarea><br/>
+                    <span class="text-danger" th:errors="*{description}"></span>
+                    <label>Etapes pour reproduire</label>
+                    <input class="form-control" type="text" th:field="*{stepsToReproduce}" /><br/>
+                    <span class="text-danger" th:errors="*{stepsToReproduce}"></span>            
+                    <label>resultats attendus</label>
+                    <input class="form-control" type="text" th:field="*{expectedResult}" /><br/>
+                    <span class="text-danger" th:errors="*{expectedResult}"></span>
+                    <label>Resultas obtenu</label>
+                    <input class="form-control" type="text" th:field="*{actualResult}" /><br/>
+                    <span class="text-danger" th:errors="*{actualResult}"></span>
+                    <label>github lien</label>
+                    <input class="form-control" type="text" th:field="*{gitBranch}" /><br/>
+                    <span class="text-danger" th:errors="*{gitBranch}"></span>
+                    <label>status</label>
+                    <input class="form-control" type="text" th:field="*{status}" /><br/>
+                    <span class="text-danger" th:errors="*{status}"></span>
+                    <label>platform</label>
+                    <input class="form-control" type="text" th:field="*{platform}" /><br/>
+                    <span class="text-danger" th:errors="*{platform}"></span>
+                   <!--  <label>Team</label>
+                    <select  class="form-control" name="team">
+                    	<option value=0>choisir une equipe</option>
+                    	<option th:each="t:${teams}"  th:text="${t.name}" th:value="${t.id}"> </option>
+                    </select><br/>
+                    <label>Chef de projet</label>
+                    <select  class="form-control" name="manager">
+                    	<option th:each="t:${managers}"  th:text="${t.name}" th:value="${t.id}"> </option>
+                    </select><br/> -->
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
