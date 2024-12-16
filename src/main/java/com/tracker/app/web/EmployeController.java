@@ -448,7 +448,7 @@ public class EmployeController {
 		model.addAttribute("developer",developer);
 		return "Admin/Developer/Profile";
 	}
-	/*@GetMapping("/DeveloperProjects")
+	@GetMapping("/DeveloperProjects")
 	public String DeveloperProjects(@RequestParam(name="page",defaultValue="0") int page
 			,@RequestParam(name="size",defaultValue="5") int size
 			,Model model, Long id,HttpSession session) {
@@ -461,7 +461,7 @@ public class EmployeController {
 		//model .mes projets
 		model.addAttribute("developer", developer);
 		return "Admin/Developer/MesProjets";
-	}*/
+	}
 	
 	@GetMapping("/DeveloperTeams")
 	@Secured({"ROLE_ADMIN", "ROLE_DEVELOPER"})
@@ -491,7 +491,7 @@ public class EmployeController {
 		model.addAttribute("tester",tester);
 		return "Admin/Tester/Profile";
 	}
-	/*@GetMapping("/TesterProjects")
+	@GetMapping("/TesterProjects")
 	 @Secured({"ROLE_ADMIN", "ROLE_TESTER"})
 	public String TesterProjects(@RequestParam(name="page",defaultValue="0") int page
 			,@RequestParam(name="size",defaultValue="5") int size
@@ -505,7 +505,7 @@ public class EmployeController {
 		//model .mes projets
 		model.addAttribute("developer", developer);
 		return "Admin/Developer/MesProjets";
-	}*/
+	}
 	
 	@GetMapping("/TesterTeams")
 	@Secured({"ROLE_ADMIN", "ROLE_TESTER"})
@@ -538,7 +538,7 @@ public class EmployeController {
 	
 	
 	
-	/*@PostMapping("/VerifyLogin")
+	@PostMapping("/VerifyLogin")
 	public String VerifyLogin(@RequestParam(name="name") String username,
 			@RequestParam(name="password") String password,HttpSession session) {
 		Employe employe=employeService.findByName(username);
@@ -553,17 +553,17 @@ public class EmployeController {
 		return password;
 		
 		
-		}*/
+		}
 	
 	
-	/*@RequestMapping(value="/Login")
+	@RequestMapping(value="/Login")
 	public String Login() {
 		return "login";
 	}
 	@RequestMapping(value="/logout")
 	public String Logout() {
 		return "redirect:Login";
-	*/
+	
 	
 	@GetMapping("/AddBug")
 	@Secured({"ROLE_ADMIN","ROLE_DEVELOPER","ROLE_TESTER","ROLE_SUPPORT"})
