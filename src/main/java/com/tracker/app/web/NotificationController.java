@@ -23,31 +23,29 @@ import org.springframework.http.MediaType;
 @Controller
 public class NotificationController {
 	
-	//@Autowired
-    //SimpMessagingTemplate simpMessagingTemplate;
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/application")
     @SendTo("/all/messages")
     public Notification send(final Notification notification) throws Exception {
         return notification;
     }
- // Mapped as /app/private
-    /*@MessageMapping("/private/{username}")
+ // 
+    @MessageMapping("/private/{username}")
     @SendToUser("/all/private/{username}")
     public void sendToSpecificUser(@Payload Notification notification) {
         simpMessagingTemplate.convertAndSendToUser("manager", "/specific/manager", "i am a notifihshsh");
-    }*/
+    }
     
     @GetMapping(value = "/myfile.js",produces = "application/javascript")
 
     @ResponseBody
     
     public byte[] getMyFile() throws IOException {
-        // Load the JavaScript file from the resources
         Resource resource = new ClassPathResource("static/notif.js");
         Path filePath = resource.getFile().toPath();
 
-        // Read the contents of the file into a byte array
         return Files.readAllBytes(filePath);
     }
 }
